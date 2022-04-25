@@ -1,0 +1,70 @@
+<div class="page-header">
+    <div class="container">
+        <h1>{{header}}</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row p-1">
+        <div class="col-xs-12 row end-xs">
+          <a routerLink="" color="primary" mat-raised-button>
+              <mat-icon>chevron_left</mat-icon>
+              Back
+          </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <form #taskDetailsForm="ngForm">
+                <div class="row">
+                    <div class="col-xs-12">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Task Name</mat-label>
+                          <input matInput placeholder="Ex. Savas" [(ngModel)]="task.name" name="firstName" required>
+                          <mat-error>Please enter a valid task name.</mat-error>
+                        </mat-form-field>                
+                    </div>
+                </div>
+              <div class="row">
+                  <div class="col-xs-12">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Priority</mat-label>
+                          <!-- <input matInput [(ngModel)]="student.gender.description" name="gender.description"> -->
+                          <mat-select [(ngModel)]="task.priorityId" name="priority" required>
+                              <mat-option *ngFor="let priority of priorityList" [value]="priority.id">
+                                {{priority.name}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error>Please enter a priority.</mat-error>
+                        </mat-form-field>                                             
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Status</mat-label>
+                        <!-- <input matInput [(ngModel)]="student.gender.description" name="gender.description"> -->
+                        <mat-select [(ngModel)]="task.statusId" name="status" required>
+                            <mat-option *ngFor="let status of statusList" [value]="status.id">
+                              {{status.name}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-error>Please enter a status.</mat-error>
+                      </mat-form-field>                                             
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row between-xs" *ngIf="!isNewTask">
+                            <button [disabled]="!taskDetailsForm.valid" (click)="onUpdate()"  color="primary" mat-raised-button>Save</button> 
+                            <button (click)="onDelete()"  color="warn" mat-raised-button>Delete</button> 
+                        </div>
+                        <div class="row between-xs" *ngIf="isNewTask">
+                            <button [disabled]="!taskDetailsForm.valid" (click)="onAdd()"  color="primary" mat-raised-button>Save</button> 
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
